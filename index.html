@@ -36,16 +36,13 @@
       line-height: 1.55;
     }
 
-    .page { max-width: 850px; margin: 0 auto; padding: 34px 20px 54px; }
-    .brand { text-align: center; margin: 12px 0 28px; }
-    .brand-mark {
-      width: 58px; height: 58px; margin: 0 auto 12px; display: grid; place-items: center;
-      border: 1px solid rgba(112,139,122,.38); border-radius: 50%; color: var(--sage-dark);
-      font-family: 'Playfair Display', serif; font-size: 27px; font-style: italic;
-      background: rgba(255,253,251,.64);
+    .page { position: relative; max-width: 850px; margin: 0 auto; padding: 34px 20px 54px; }
+    .bsd {
+      position: absolute; z-index: 2; top: 13px; right: 25px; color: #5d554f;
+      font: 600 15px/1 'Heebo', Arial, sans-serif; letter-spacing: .04em;
     }
-    .brand h1 { margin: 0; font: 700 27px/1.1 'Playfair Display', serif; letter-spacing: .02em; }
-    .brand p { margin: 7px 0 0; color: var(--sage-dark); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .brand { display: flex; justify-content: center; margin: 4px 0 22px; padding: 0 44px; }
+    .brand-logo { display: block; width: min(100%, 450px); height: auto; mix-blend-mode: multiply; }
 
     .form-shell { overflow: hidden; background: var(--white); border: 1px solid rgba(231,221,213,.9); border-radius: 24px; box-shadow: var(--shadow); }
     .intro { position: relative; overflow: hidden; padding: 38px 42px 32px; background: linear-gradient(125deg, #e6efe7, #f4eee8); }
@@ -112,7 +109,9 @@
 
     @media (max-width: 620px) {
       .page { padding: 18px 12px 36px; }
-      .brand { margin: 8px 0 20px; }
+      .bsd { top: 9px; right: 19px; font-size: 13px; }
+      .brand { margin: 0 0 16px; padding: 0 32px; }
+      .brand-logo { width: min(100%, 360px); }
       .intro { padding: 29px 23px 27px; }
       .intro::after { left: 18px; bottom: 12px; font-size: 45px; }
       .intro h2 { font-size: 27px; }
@@ -126,10 +125,9 @@
 </head>
 <body>
   <main class="page">
+    <div class="bsd" aria-label="בסייעתא דשמיא">בס״ד</div>
     <header class="brand">
-      <div class="brand-mark">K</div>
-      <h1>By Karin</h1>
-      <p>Skin &amp; Care</p>
+      <img class="brand-logo" src="./skin-anatomy-logo.jpg" alt="Skin Anatomy by Karin" />
     </header>
 
     <section class="form-shell" aria-labelledby="form-title">

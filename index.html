@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="שאלון אבחון עור ובריאות — By Karin" />
   <title>שאלון אבחון עור ובריאות | By Karin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --ink: #39332e;
@@ -32,14 +29,20 @@
         radial-gradient(circle at 90% 2%, rgba(221, 235, 222, .85) 0, rgba(221,235,222,0) 24rem),
         radial-gradient(circle at 5% 26%, rgba(247, 227, 220, .6) 0, rgba(247,227,220,0) 25rem),
         var(--sand);
-      font-family: 'Heebo', Arial, sans-serif;
+      font-family: Arial, "Helvetica Neue", sans-serif;
       line-height: 1.55;
     }
 
     .page { position: relative; max-width: 850px; margin: 0 auto; padding: 34px 20px 54px; }
+    .skip-link {
+      position: absolute; z-index: 10; top: -60px; right: 20px; padding: 10px 14px;
+      border-radius: 9px; color: #fff; background: var(--sage-dark); font-weight: 700;
+      text-decoration: none; transition: top .16s ease;
+    }
+    .skip-link:focus { top: 10px; outline: 3px solid #2f4e3a; outline-offset: 2px; }
     .bsd {
       position: absolute; z-index: 2; top: 13px; right: 25px; color: #5d554f;
-      font: 600 15px/1 'Heebo', Arial, sans-serif; letter-spacing: .04em;
+      font: 600 15px/1 Arial, "Helvetica Neue", sans-serif; letter-spacing: .04em;
     }
     .brand { display: flex; justify-content: center; margin: 4px 0 22px; padding: 0 44px; }
     .brand-logo { display: block; width: min(100%, 450px); height: auto; mix-blend-mode: multiply; }
@@ -48,7 +51,7 @@
     .intro { position: relative; overflow: hidden; padding: 38px 42px 32px; background: linear-gradient(125deg, #e6efe7, #f4eee8); }
     .intro::after { content: '✦'; position: absolute; left: 38px; bottom: 20px; color: rgba(112,139,122,.48); font-size: 58px; }
     .eyebrow { margin: 0 0 8px; color: var(--sage-dark); font-size: 13px; font-weight: 700; letter-spacing: .1em; }
-    .intro h2 { margin: 0; max-width: 550px; font: 700 32px/1.25 'Playfair Display', 'Heebo', serif; }
+    .intro h2 { margin: 0; max-width: 550px; font: 700 32px/1.25 Georgia, "Times New Roman", serif; }
     .intro-text { max-width: 580px; margin: 14px 0 0; color: #5c5651; font-size: 16px; }
     .privacy-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; max-width: 600px; color: #5f6f63; font-size: 13px; }
     .privacy-note span { flex: 0 0 auto; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; color: white; background: var(--sage); font-size: 12px; }
@@ -93,7 +96,7 @@
     .closing { margin: 0 auto 18px; max-width: 520px; color: var(--muted); font-size: 14px; }
     .consent { display: flex; align-items: flex-start; justify-content: center; gap: 9px; margin: 0 auto 22px; max-width: 560px; text-align: right; color: #5f5751; font-size: 13px; cursor: pointer; }
     .consent input { width: 17px; height: 17px; margin: 3px 0 0; accent-color: var(--sage-dark); }
-    .submit-button { width: min(100%, 350px); min-height: 54px; padding: 12px 24px; border: 0; border-radius: 999px; background: var(--sage-dark); color: #fff; font: 700 16px 'Heebo', sans-serif; box-shadow: 0 10px 22px rgba(77,105,89,.24); transition: transform .18s, background .18s, box-shadow .18s; }
+    .submit-button { width: min(100%, 350px); min-height: 54px; padding: 12px 24px; border: 0; border-radius: 999px; background: var(--sage-dark); color: #fff; font: 700 16px Arial, "Helvetica Neue", sans-serif; box-shadow: 0 10px 22px rgba(77,105,89,.24); transition: transform .18s, background .18s, box-shadow .18s; }
     .submit-button:hover { background: #405a4a; transform: translateY(-2px); box-shadow: 0 13px 26px rgba(77,105,89,.3); }
     .submit-button:disabled { cursor: wait; opacity: .72; transform: none; }
     .status { min-height: 25px; margin: 15px 0 0; font-size: 14px; font-weight: 600; }
@@ -103,7 +106,7 @@
     .success-screen { display: none; padding: 70px 28px; text-align: center; }
     .success-screen.show { display: block; }
     .success-bloom { display: grid; place-items: center; width: 72px; height: 72px; margin: 0 auto 22px; border-radius: 50%; color: var(--sage-dark); background: var(--sage-soft); font-size: 34px; }
-    .success-screen h2 { margin: 0; font: 700 30px 'Playfair Display', 'Heebo', serif; }
+    .success-screen h2 { margin: 0; font: 700 30px Georgia, "Times New Roman", serif; }
     .success-screen p { max-width: 440px; margin: 14px auto 0; color: var(--muted); }
     .fine-print { margin: 25px 0 0; color: #968a81; font-size: 12px; }
 
@@ -124,10 +127,11 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#form-title">דלגי ישירות לשאלון</a>
   <main class="page">
     <div class="bsd" aria-label="בסייעתא דשמיא">בס״ד</div>
     <header class="brand">
-      <img class="brand-logo" src="./skin-anatomy-logo.jpg" alt="Skin Anatomy by Karin" />
+      <img class="brand-logo" src="./skin-anatomy-logo.webp" alt="Skin Anatomy by Karin" width="1010" height="365" fetchpriority="high" decoding="async" />
     </header>
 
     <section class="form-shell" aria-labelledby="form-title">

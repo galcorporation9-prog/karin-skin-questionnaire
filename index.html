@@ -244,10 +244,10 @@
 
         <section class="section">
           <div class="section-heading"><span class="section-number">06</span><h3>אישור ושליחה</h3><span class="icon">✉</span></div>
-          <p style="margin:0 0 20px;color:var(--muted);font-size:14px;">נשמח לוודא את פרטי הקשר שלך לפני שנשלח את השאלון.</p>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:14px;">פרטי הקשר שמילאת בתחילת השאלון מוצגים כאן לאישור אוטומטי — אין צורך למלא אותם שוב.</p>
           <div class="grid grid-3">
-            <div class="field"><label for="fullNameEnd">שם מלא <span class="required">*</span></label><input id="fullNameEnd" name="שם מלא לאישור" type="text" required placeholder="השם המלא שלך" /></div>
-            <div class="field"><label for="phoneEnd">טלפון <span class="required">*</span></label><input id="phoneEnd" name="טלפון לאישור" type="tel" inputmode="tel" required placeholder="050-0000000" /></div>
+            <div class="field"><label for="fullNameEnd">שם מלא <small style="font-weight:400;color:#887e76">(כפי שמילאת)</small></label><input id="fullNameEnd" type="text" readonly aria-readonly="true" tabindex="-1" placeholder="יוצג כאן אוטומטית" /></div>
+            <div class="field"><label for="phoneEnd">טלפון <small style="font-weight:400;color:#887e76">(כפי שמילאת)</small></label><input id="phoneEnd" type="tel" readonly aria-readonly="true" tabindex="-1" placeholder="יוצג כאן אוטומטית" /></div>
             <div class="field"><label for="email">אימייל <small style="font-weight:400;color:#887e76">(אופציונלי)</small></label><input id="email" name="אימייל לקשר" type="text" inputmode="email" autocomplete="email" placeholder="example@email.com" /></div>
           </div>
         </section>
@@ -288,19 +288,23 @@
       document.getElementById('concern-other-details').classList.toggle('visible', event.target.checked);
     });
 
-    // Keep the duplicate contact fields in sync while preserving the user's ability to edit them.
-    document.getElementById('fullName').addEventListener('input', (event) => {
-      const endField = document.getElementById('fullNameEnd');
-      if (!endField.dataset.manuallyEdited) endField.value = event.target.value;
+    // Display the contact details a second time for review without asking the client to enter them again.
+    const fullNameField = document.getElementById('fullName');
+    const phoneField = document.getElementById('phone');
+    const fullNameConfirmation = document.getElementById('fullNameEnd');
+    const phoneConfirmation = document.getElementById('phoneEnd');
+    const syncContactConfirmation = () => {
+      fullNameConfirmation.value = fullNameField.value;
+      phoneConfirmation.value = phoneField.value;
+    };
+    ['input', 'change', 'blur'].forEach((eventName) => {
+      fullNameField.addEventListener(eventName, syncContactConfirmation);
+      phoneField.addEventListener(eventName, syncContactConfirmation);
     });
-    document.getElementById('phone').addEventListener('input', (event) => {
-      const endField = document.getElementById('phoneEnd');
-      if (!endField.dataset.manuallyEdited) endField.value = event.target.value;
-    });
-    ['fullNameEnd', 'phoneEnd'].forEach((id) => document.getElementById(id).addEventListener('input', (event) => { event.target.dataset.manuallyEdited = 'true'; }));
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      syncContactConfirmation();
       status.textContent = '';
       status.className = 'status';
 
@@ -326,7 +330,7 @@
         const payload = new FormData(form);
         // FormSubmit sends the completed form to the address below.
         // The first time it is used, FormSubmit will send an activation message to this inbox.
-        const response = await fetch('https://formsubmit.co/ajax/karindan1000@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/galcorporation9@gmail.com', {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: payload
